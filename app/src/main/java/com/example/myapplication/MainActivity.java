@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     protected double [] arrayLocation = new double[3];
     private static final int REQUEST_CODE_PREMISSION_LOCATOIN = 189;
-
+    private int isTracking = 0;
 
 
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                             arrayLocation[0] = accuracy;
                             arrayLocation[1] = latitude;
                             arrayLocation[2] = longitude;
+                            Log.d("accuracy",Double.toString(accuracy));
 
 
 
@@ -83,25 +84,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean hasLocationPremition = ActivityCompat.checkSelfPermission(activity,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-                Log.d("CLICKED","has clicked");
+                Log.d("istracking",Integer.toString(isTracking));
 
                 if (hasLocationPremition)
                 {
-//                    if (trackMode == 0) {
-                    track_location();
+                    if (isTracking == 0) {
+                        track_location();
 
-                    Accuracy.setText(Double.toString(arrayLocation[0]));
-                    Latitude.setText(Double.toString(arrayLocation[1]));
-                    Longitude.setText(Double.toString(arrayLocation[2]));
-                    Accuracy.setVisibility(View.VISIBLE);
-                    Longitude.setVisibility(View.VISIBLE);
-                    Latitude.setVisibility(View.VISIBLE);
-                    showAccuracy.setVisibility(View.VISIBLE);
-                    showLatitude.setVisibility(View.VISIBLE);
-                    showLongitude.setVisibility(View.VISIBLE);
+                        Accuracy.setText(Double.toString(arrayLocation[0]));
+                        Latitude.setText(Double.toString(arrayLocation[1]));
+                        Longitude.setText(Double.toString(arrayLocation[2]));
+                        Accuracy.setVisibility(View.VISIBLE);
+                        Longitude.setVisibility(View.VISIBLE);
+                        Latitude.setVisibility(View.VISIBLE);
+                        showAccuracy.setVisibility(View.VISIBLE);
+                        showLatitude.setVisibility(View.VISIBLE);
+                        showLongitude.setVisibility(View.VISIBLE);
+                        startOrEndLocationTracking.setText("End tracking");
 
-                    startOrEndLocationTracking.setText(getResources()
-                            .getString(R.string.end_tracking));
+                    }
+                    else if (isTracking == 1)
+                    {
+                        Accuracy.setVisibility(View.INVISIBLE);
+                        Longitude.setVisibility(View.INVISIBLE);
+                        Latitude.setVisibility(View.INVISIBLE);
+                        showAccuracy.setVisibility(View.INVISIBLE);
+                        showLatitude.setVisibility(View.INVISIBLE);
+                        showLongitude.setVisibility(View.INVISIBLE);
+                        startOrEndLocationTracking.setText("End tracking");
+
+                    }
+                    isTracking = 1-isTracking;
                 }
                 else
                 {
