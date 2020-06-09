@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="start_tracking">Start tracking</string>
+    <string name="end_tracking">End tracking</string>
+    <string name="current_longitude">Your current longitude is</string>
+    <string name="current_latitude">Your current latitude is</string>
+    <string name="current_accuracy">Your current accuracy is</string>
+    <string name="now">now</string>
+</resources>
