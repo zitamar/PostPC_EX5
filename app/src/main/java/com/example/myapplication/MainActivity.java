@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected double [] arrayLocation = new double[3];
     private static final int REQUEST_CODE_PREMISSION_LOCATOIN = 189;
     private int isTracking = 0;
+    private int homeDefined = 0;
 
 
 
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView showLatitude = (TextView) findViewById(R.id.showLatitude);
         final TextView showLongitude = (TextView) findViewById(R.id.ShowLongitude);
         final TextView showAccuracy = (TextView) findViewById(R.id.ShowAccuracy);
+        final Button setHome = (Button) findViewById(R.id.setHome);
+        final TextView displayHomeLoc = (TextView) findViewById(R.id.HomeLoc) ;
         StartOrEndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +91,24 @@ public class MainActivity extends AppCompatActivity {
 
                 if (hasLocationPremition)
                 {
+                    track_location();
+
+
+
                     if (isTracking == 0) {
                         track_location();
+                        if (homeDefined == 0)
+                        {
+                            if (arrayLocation[0] < 50 && arrayLocation[0] != 0.0) {
+                                setHome.setVisibility(View.VISIBLE);
+                                displayHomeLoc.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else
+                        {
+                            displayHomeLoc.setVisibility(View.VISIBLE);
+                            setHome.setText("clear home data");
+                        }
 
                         Accuracy.setText(Double.toString(arrayLocation[0]));
                         Latitude.setText(Double.toString(arrayLocation[1]));
@@ -105,25 +124,38 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if (isTracking == 1)
                     {
+
                         Accuracy.setVisibility(View.INVISIBLE);
                         Longitude.setVisibility(View.INVISIBLE);
                         Latitude.setVisibility(View.INVISIBLE);
                         showAccuracy.setVisibility(View.INVISIBLE);
                         showLatitude.setVisibility(View.INVISIBLE);
                         showLongitude.setVisibility(View.INVISIBLE);
-                        startOrEndLocationTracking.setText("End tracking");
+                        startOrEndLocationTracking.setText("Start tracking");
+                        setHome.setVisibility(View.INVISIBLE);
+
 
                     }
                     isTracking = 1-isTracking;
                 }
                 else
                 {
-                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE_PREMISSION_LOCATOIN);
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission
+                            .ACCESS_FINE_LOCATION},REQUEST_CODE_PREMISSION_LOCATOIN);
 
                 }
             }
 
         });
+        setHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayHomeLoc.setVisibility(View.VISIBLE);
+                setHome.setText("CLEAR HOME LOCATION");
+            }
+        });
+
+
     }
 
 }
