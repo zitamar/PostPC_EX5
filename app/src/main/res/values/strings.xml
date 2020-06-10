@@ -6,4 +6,7 @@
     <string name="current_latitude">Your current latitude is</string>
     <string name="current_accuracy">Your current accuracy is</string>
     <string name="now">now</string>
+    <string name="setHome">set home location</string>
+    <string name="homeLoc">your home location is (longitude, latitude, accuracy)</string>
+    <string name="clearHome">clear home location</string>
 </resources>

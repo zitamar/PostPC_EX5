@@ -96,4 +96,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ShowAccuracy"
         app:layout_constraintTop_toTopOf="@+id/ShowAccuracy" />
+
+
+
+
+        <Button
+            android:id="@+id/setHone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setHome"
+            app:layout_constraintBottom_toTopOf="@+id/StartOrEndButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShowAccuracy" />
+
+
+        <TextView
+            android:id="@+id/HomeLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/homeLoc"
+            app:layout_constraintBottom_toTopOf="@+id/showLatitude"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/displayHomeLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/Latitude"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/HomeLoc"
+            app:layout_constraintVertical_bias="0.153" />
 </androidx.constraintlayout.widget.ConstraintLayout>
