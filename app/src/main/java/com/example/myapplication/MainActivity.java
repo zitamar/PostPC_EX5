@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PREMISSION_LOCATOIN = 189;
     private int isTracking = 0;
     private int homeDefined = 0;
+    private String KEY_ACCURACY = "accuracy";
+    private String KEY_longitude = "longitude";
+    private String KEY_latitude = "latitude";
+
+
 
 
 
@@ -82,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         final TextView showAccuracy = (TextView) findViewById(R.id.ShowAccuracy);
         final Button setHome = (Button) findViewById(R.id.setHome);
         final TextView displayHomeLoc = (TextView) findViewById(R.id.HomeLoc) ;
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final SharedPreferences.Editor editor = sp.edit();
+
         StartOrEndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +162,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 displayHomeLoc.setVisibility(View.VISIBLE);
                 setHome.setText("CLEAR HOME LOCATION");
+                editor.putString(KEY_ACCURACY,Double.toString(arrayLocation[0]));
+                editor.putString(KEY_latitude,Double.toString(arrayLocation[1]));
+                editor.putString(KEY_longitude,Double.toString(arrayLocation[2]));
+                editor.apply();
+                Log.d("finish sp accuracy is", sp.getString(KEY_ACCURACY,"") );
+
+
             }
         });
 
