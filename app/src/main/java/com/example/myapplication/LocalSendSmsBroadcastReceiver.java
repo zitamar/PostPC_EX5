@@ -18,8 +18,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class LocalSendSmsBroadcastReceiver extends BroadcastReceiver {
-    public String PHONE_KEY;
-    public String CONTENT_KEY;
+    public String PHONE_KEY = "phone";
+    public String CONTENT_KEY = "content";
     public String DEFAULT = null;
     @Override
     public void onReceive(Context context, Intent intent) {

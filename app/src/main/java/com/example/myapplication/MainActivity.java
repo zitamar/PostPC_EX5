@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import android.Manifest;
 
@@ -23,6 +24,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity implements DialogSms.DialogSmsListener {
+    private static String Actionsms = "POST_PC.ACTION_SEND_SMS";
+    private static String PHONE_KEY = "phone";
+    private static String CONTENT_KEY = "content";
     private FusedLocationProviderClient fusedLocationClient;
     protected double [] arrayLocation = new double[3];
     private static final int REQUEST_CODE_PREMISSION_LOCATOIN = 189;
@@ -31,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements DialogSms.DialogS
     private String KEY_ACCURACY = "accuracy";
     private String KEY_longitude = "longitude";
     private String KEY_latitude = "latitude";
-    String phoneNumber ;
+    static String phoneNumber ;
+   // String Actionsms =
 
 
 
@@ -121,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements DialogSms.DialogS
                             if (arrayLocation[0] < 50 && arrayLocation[0] != 0.0) {
                                 setHome.setVisibility(View.VISIBLE);
                                 displayHomeLoc.setVisibility(View.INVISIBLE);
+                                if (phoneNumber != null)
+                                {
+                                    sendBroadcast(activity);
+                                }
                             }
                         }
                         else
@@ -187,6 +196,15 @@ public class MainActivity extends AppCompatActivity implements DialogSms.DialogS
             }
         });
 
+    }
+
+    static void sendBroadcast (Context context)
+    {
+        Intent intent = new Intent();
+        intent.setAction(Actionsms);
+        intent.putExtra(PHONE_KEY, phoneNumber);
+        intent.putExtra(CONTENT_KEY, "honey im home!!!!!");
+        context.sendBroadcast(intent);
     }
 
     private void openDialog() {
