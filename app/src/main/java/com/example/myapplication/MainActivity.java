@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private String KEY_ACCURACY = "accuracy";
     private String KEY_longitude = "longitude";
     private String KEY_latitude = "latitude";
+
 
 
 
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView showAccuracy = (TextView) findViewById(R.id.ShowAccuracy);
         final Button setHome = (Button) findViewById(R.id.setHome);
         final TextView displayHomeLoc = (TextView) findViewById(R.id.HomeLoc) ;
+        final Button smsBtn = (Button) findViewById(R.id.setsms) ;
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final SharedPreferences.Editor editor = sp.edit();
 
@@ -171,6 +176,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        smsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+
+        public void openDialog()
+        {
+
+        }
 
 
     }
