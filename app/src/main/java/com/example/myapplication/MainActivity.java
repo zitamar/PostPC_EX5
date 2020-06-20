@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +22,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DialogSms.DialogSmsListener {
     private FusedLocationProviderClient fusedLocationClient;
     protected double [] arrayLocation = new double[3];
     private static final int REQUEST_CODE_PREMISSION_LOCATOIN = 189;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private String KEY_ACCURACY = "accuracy";
     private String KEY_longitude = "longitude";
     private String KEY_latitude = "latitude";
+    String phoneNumber ;
 
 
 
@@ -94,8 +96,10 @@ public class MainActivity extends AppCompatActivity {
         final Button setHome = (Button) findViewById(R.id.setHome);
         final TextView displayHomeLoc = (TextView) findViewById(R.id.HomeLoc) ;
         final Button smsBtn = (Button) findViewById(R.id.setsms) ;
+        final TextView textViewSms;
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final SharedPreferences.Editor editor = sp.edit();
+
 
         StartOrEndButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,12 +187,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        public void openDialog()
-        {
+    }
 
-        }
+    private void openDialog() {
+        DialogSms dialog = new DialogSms();
+        dialog.show(getSupportFragmentManager(),"example");
+    }
+
+    @Override
+    public void applyTexts(String number) {
+
+        Log.d("nothing", "is happened here");
+        phoneNumber = number;
 
 
     }
-
 }
